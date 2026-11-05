@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Portfolio — dailydesigns99</title>
+<meta name="description" content="Graphic designer portfolio showcasing brand identity, logo and visual design work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf9; --bg-elev: #ffffff; --fg: #18181b; --muted: #52525b;
+    --line: #e4e4e7; --accent: #1a2b4a; --card: #f4f4f5;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+    --radius: 16px;
+  }
+  [data-theme="dark"] {
+    --bg: #0a0a0a; --bg-elev: #141414; --fg: #fafafa; --muted: #a1a1aa;
+    --line: #27272a; --accent: #7dd3fc; --card: #1c1c1e;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg); color: var(--fg); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; transition: background .3s, color .3s;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  nav { position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between; }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
+  .nav-links a:hover { color: var(--fg); }
+  .theme-toggle { border: 1px solid var(--line); background: var(--bg-elev); color: var(--fg);
+    width: 38px; height: 38px; border-radius: 999px; cursor: pointer; font-size: 16px;
+    display: grid; place-items: center; transition: transform .2s; }
+  .theme-toggle:hover { transform: rotate(20deg); }
+
+  .hero { max-width: 1280px; margin: 0 auto; padding: 80px 24px 48px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .hero h1 { font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 600; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { margin-top: 20px; color: var(--muted); font-size: 17px; max-width: 540px; }
+  .hero-cta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { padding: 12px 22px; border-radius: 999px; font-size: 14px; font-weight: 600;
+    border: 1px solid var(--line); background: var(--bg-elev); color: var(--fg);
+    cursor: pointer; transition: transform .15s, box-shadow .15s; display: inline-block; }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .hero-art { position: relative; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden;
+    background: var(--card); border: 1px solid var(--line); }
+  .hero-art img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-badge { position: absolute; bottom: 16px; left: 16px; right: 16px;
+    display: flex; justify-content: space-between; font-size: 12px; color: #fff;
+    text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+
+  section { max-width: 1280px; margin: 0 auto; padding: 56px 24px; }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+  .section-head h2 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 600; letter-spacing: -0.01em; }
+  .section-head p { color: var(--muted); max-width: 460px; }
+
+  /* Gallery */
+  .gallery { columns: 4 240px; column-gap: 16px; }
+  .gitem { break-inside: avoid; margin-bottom: 16px; border-radius: var(--radius);
+    overflow: hidden; background: var(--bg-elev); border: 1px solid var(--line);
+    cursor: pointer; transition: transform .2s, box-shadow .2s, border-color .2s; position: relative; }
+  .gitem:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--accent); }
+  .gitem img { width: 100%; height: auto; display: block; }
+  .gitem .label { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px;
+    background: rgba(0,0,0,.55); color: #fff; font-size: 12px; font-weight: 500;
+    border-radius: 999px; backdrop-filter: blur(6px); opacity: 0; transition: opacity .2s; }
+  .gitem:hover .label { opacity: 1; }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .about h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; margin-bottom: 12px; }
+  .about p { color: var(--muted); margin-bottom: 14px; }
+  .skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .skill { padding: 8px 14px; border-radius: 8px; background: var(--bg-elev); border: 1px solid var(--line);
+    font-size: 13px; font-weight: 500; }
+
+  /* Process */
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .step { padding: 24px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius); }
+  .step-num { font-family: 'Playfair Display', Georgia, serif; font-size: 32px; color: var(--accent); margin-bottom: 8px; }
+  .step h4 { font-size: 15px; margin-bottom: 6px; }
+  .step p { font-size: 13px; color: var(--muted); }
+
+  /* Contact */
+  .contact { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 24px;
+    padding: 48px; text-align: center; }
+  .contact h2 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px,4vw,40px); }
+  .contact p { color: var(--muted); margin: 12px auto 24px; max-width: 520px; }
+  .contact .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 24px; text-align: center;
+    color: var(--muted); font-size: 13px; max-width: 1280px; margin: 0 auto; }
+
+  /* Modal / lightbox */
+  .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .modal.open { display: flex; }
+  .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(6px); }
+  .modal-panel { position: relative; background: var(--bg-elev); border: 1px solid var(--line);
+    border-radius: 20px; max-width: 900px; width: 100%; padding: 20px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.4); animation: pop .2s ease-out; }
+  @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; font-size: 18px; z-index: 2; }
+  .modal-img { width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 12px; background: var(--card); }
+  .modal-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; gap: 16px; flex-wrap: wrap; }
+  .modal-meta h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; }
+  .modal-meta span { color: var(--muted); font-size: 13px; }
+  .modal-nav { display: flex; gap: 8px; }
+  .modal-nav button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--bg-elev); color: var(--fg); cursor: pointer; font-size: 13px; }
+  .modal-nav button:hover { background: var(--card); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 48px; }
+    .hero-art { max-width: 420px; margin: 0 auto; }
+    .about { grid-template-columns: 1fr; }
+    .process { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .gallery { columns: 2 160px; }
+  }
+  @media (max-width: 480px) {
+    .process { grid-template-columns: 1fr; }
+    .gallery { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <div class="brand">dailydesigns99</div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>Design that <em>speaks</em> for itself.</h1>
+    <p>I'm a graphic designer creating bold, memorable visual identities — from logos and brand systems to marketing assets. Explore a selection of recent work below.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#work">View Work</a>
+      <a class="btn" href="#contact">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-art" id="heroArt">
+    <img src="" alt="Featured work">
+    <div class="hero-badge">
+      <span id="heroCount">30 selected works</span>
+      <span>2026</span>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="section-head">
+    <h2>Selected Work</h2>
+    <p>A curated gallery of design projects across brand identity, logo design and visual communication.</p>
+  </div>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <h2>About</h2>
+    <p>The designer behind the work.</p>
+  </div>
+  <div class="about">
+    <div>
+      <h3>Design with purpose.</h3>
+      <p>I'm a graphic designer passionate about creating distinctive, professional visual identities. With a strong eye for typography, color, and composition, I turn ideas into brand marks and assets that communicate clearly and make a lasting impression.</p>
+      <p>Every piece is crafted from scratch — concept, exploration, refinement, and final delivery — ensuring originality and a perfect fit for each brand.</p>
+    </div>
+    <div>
+      <h3>Specialties</h3>
+      <div class="skills">
+        <span class="skill">Brand Identity</span>
+        <span class="skill">Logo Design</span>
+        <span class="skill">Typography</span>
+        <span class="skill">Color Theory</span>
+        <span class="skill">Visual Composition</span>
+        <span class="skill">Marketing Assets</span>
+        <span class="skill">Vector Design</span>
+        <span class="skill">Print &amp; Digital</span>
+      </div>
+      <h3 style="margin-top:24px">Deliverables</h3>
+      <p style="color:var(--muted)">Source files (AI, EPS, SVG), PNG/JPG exports, color variations, brand guidelines, and full copyright transfer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-head">
+    <h2>Process</h2>
+    <p>A clear, collaborative path from brief to final delivery.</p>
+  </div>
+  <div class="process">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Discovery</h4>
+      <p>Brand brief, audience, competitors, and goals.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Concepts</h4>
+      <p>Multiple original directions with rationale.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Refinement</h4>
+      <p>Typography, color, and balance tuned to perfection.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Delivery</h4>
+      <p>Final files, variations, and guidelines.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <h2>Let's build something great.</h2>
+    <p>Available for new brand identity and design projects. Tell me about your business and I'll craft visuals that fit.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:dailyrecipenest@gmail.com">dailyrecipenest@gmail.com</a>
+      <a class="btn" href="#work">See More Work</a>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-meta">
+      <div>
+        <h3 id="modalTitle">Work</h3>
+        <span id="modalCat">Attachment</span>
+      </div>
+      <div class="modal-nav">
+        <button id="prevBtn">← Prev</button>
+        <button id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 dailydesigns99 — Design Portfolio. Built with care.
+</footer>
+
+<script>
+const t = document.getElementById('themeToggle');
+const root = document.documentElement;
+const saved = localStorage.getItem('theme');
+if (saved) root.setAttribute('data-theme', saved);
+t.addEventListener('click', () => {
+  const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  if (cur === 'light') root.removeAttribute('data-theme'); else root.setAttribute('data-theme','dark');
+  localStorage.setItem('theme', cur === 'light' ? '' : 'dark');
+});
+
+const works = [
+  { id: '165963375', title: 'Work 01', img: 'https://images-platform.99static.com/Q6Sb1K-LYSWqqK5gOm9ljnm-hAc=/0x3403:1222x4625/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165963/attachment_165963375' },
+  { id: '165947353', title: 'Work 02', img: 'https://images-platform.99static.com/du_WIHCluR86UszdMDL-V8Rrw8k=/0x0:2040x2040/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165947/attachment_165947353' },
+  { id: '165931821', title: 'Work 03', img: 'https://images-platform.99static.com/acqmx0QCF0a5ufcWWsvENAL7URI=/125x125:1128x1128/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165931/attachment_165931821' },
+  { id: '166027743', title: 'Work 04', img: 'https://images-platform.99static.com/LvjwHRp0KFAwVW_sASYSUrhGHK8=/0x0:1632x1632/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/166/166027/attachment_166027743' },
+  { id: '165981115', title: 'Work 05', img: 'https://images-platform.99static.com/pSjDVmPgCSY4KrGHswun9UJcKl8=/324x0:1656x1332/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165981/attachment_165981115' },
+  { id: '165972822', title: 'Work 06', img: 'https://images-platform.99static.com/3VO1ocMpCzJwtiJYZSWunmT-Gbc=/0x0:1182x1182/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165972/attachment_165972822' },
+  { id: '165990094', title: 'Work 07', img: 'https://images-platform.99static.com/3qeEbw_PA884T4AWqEyohNKIfLk=/0x0:2000x2000/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165990/attachment_165990094' },
+  { id: '165902409', title: 'Work 08', img: 'https://images-platform.99static.com/Eg0IyCR6sXf70_rJXrM3C26AMxo=/184x153:1611x1580/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165902/attachment_165902409' },
+  { id: '165917216', title: 'Work 09', img: 'https://images-platform.99static.com/pJIvFfR_rvu5q301XsB02MmbVaE=/28x1040:998x2010/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165917/attachment_165917216' },
+  { id: '165897077', title: 'Work 10', img: 'https://images-platform.99static.com/gUJEIoW8VXhlGrCpoWkcmvPzFmk=/0x0:1182x1182/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165897/attachment_165897077' },
+  { id: '166005285', title: 'Work 11', img: 'https://images-platform.99static.com/zXFslyLKVzrgvDh1BIu5TfRT4Uc=/3x0:997x994/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/166/166005/attachment_166005285' },
+  { id: '166018018', title: 'Work 12', img: 'https://images-platform.99static.com/lZY824V0ID1y9pph6wr9PBvAsqk=/0x0:1000x1000/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/166/166018/attachment_166018018' },
+  { id: '165936320', title: 'Work 13', img: 'https://images-platform.99static.com/QIaKTBTdZzQQgqR8wd53O22E0HE=/0x0:1976x1976/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165936/attachment_165936320' },
+  { id: '165921641', title: 'Work 14', img: 'https://images-platform.99static.com/HFJPbXH-Kc2NAvweos3nRfO_4Wk=/0x0:2004x2004/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165921/attachment_165921641' },
+  { id: '165957139', title: 'Work 15', img: 'https://images-platform.99static.com/3m-zIVdpeIu7WSMEz2OF4VFM4s0=/200x2200:1800x3800/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165957/attachment_165957139' },
+  { id: '165984886', title: 'Work 16', img: 'https://images-platform.99static.com/wzu42IGI0HVVO5v01ZqfmKptAZE=/0x0:1376x1376/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165984/attachment_165984886' },
+  { id: '166003791', title: 'Work 17', img: 'https://images-platform.99static.com/FltJG6qNWP3XhxPjiKQtvgfLKSA=/0x31:1998x2029/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/166/166003/attachment_166003791' },
+  { id: '165988810', title: 'Work 18', img: 'https://images-platform.99static.com/RcBXlY8lmj5w8loAIbnOXGFg9sk=/124x124:1124x1124/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165988/attachment_165988810' },
+  { id: '165985918', title: 'Work 19', img: 'https://images-platform.99static.com/ShjhxceRWN01h_ne7MobJVXJWIM=/0x0:1000x1000/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165985/attachment_165985918' },
+  { id: '165997244', title: 'Work 20', img: 'https://images-platform.99static.com/pXEcqQyo9tT82DQaGLgYuiuP1Fc=/165x165:1493x1493/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165997/attachment_165997244' },
+  { id: '165936593', title: 'Work 21', img: 'https://images-platform.99static.com/xvVg0sFmHXtS-uiyVFaWcFxaQV8=/0x592:588x1180/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165936/attachment_165936593' },
+  { id: '165954039', title: 'Work 22', img: 'https://images-platform.99static.com/XIeOsZZD8YCf6skKo7SVnRbG__s=/0x0:1500x1500/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165954/attachment_165954039' },
+  { id: '165990696', title: 'Work 23', img: 'https://images-platform.99static.com/FIhdAHe9cCW7yoVm8w87lHfQb5Y=/121x121:1096x1096/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165990/attachment_165990696' },
+  { id: '165986398', title: 'Work 24', img: 'https://images-platform.99static.com/MnOEp0v6o-WV4C_t2HS7GK7ntvw=/149x149:1349x1349/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165986/attachment_165986398' },
+  { id: '165965015', title: 'Work 25', img: 'https://images-platform.99static.com/cOV8OIEbamt2lmNUBMqK5TN0kYw=/0x1000:1000x2000/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165965/attachment_165965015' },
+  { id: '165993068', title: 'Work 26', img: 'https://images-platform.99static.com/_upDwYS7gS5-uHh1YA616BW6oAs=/180x179:1619x1618/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165993/attachment_165993068' },
+  { id: '166010493', title: 'Work 27', img: 'https://images-platform.99static.com/yJM1NADQw8mm1lZjKg1DcpOEIE8=/164x164:1484x1484/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/166/166010/attachment_166010493' },
+  { id: '165975626', title: 'Work 28', img: 'https://images-platform.99static.com/6kFKu9rx8C2AKYBKtqlgOTX_jro=/0x0:1770x1770/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165975/attachment_165975626' },
+  { id: '165910477', title: 'Work 29', img: 'https://images-platform.99static.com/nOeYRqZ9sJP9E0BiDX3mRGIvxNM=/0x0:1080x1080/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/165/165910/attachment_165910477' },
+  { id: '166021472', title: 'Work 30', img: 'https://images-platform.99static.com/e_FaY0dbm8y2xZ03OEHCWzZ6HUU=/124x124:1116x1116/500x500/top/smart/filters:format(webp)/99designs-contests-attachments/166/166021/attachment_166021472' },];
+
+const gallery = document.getElementById('gallery');
+works.forEach((w, i) => {
+  const el = document.createElement('div');
+  el.className = 'gitem';
+  el.innerHTML = `<img src="${w.img}" alt="${w.title}" loading="lazy"><span class="label">${w.title}</span>`;
+  el.addEventListener('click', () => openModal(i));
+  gallery.appendChild(el);
+});
+
+// hero rotation
+const heroImg = document.querySelector('#heroArt img');
+let hi = 0;
+function setHero(i){ heroImg.src = works[i].img; heroImg.alt = works[i].title; }
+setHero(0);
+setInterval(()=>{ hi = (hi+1)%works.length; setHero(hi); }, 3500);
+
+const modal = document.getElementById('modal');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalClose = document.getElementById('modalClose');
+const modalImg = document.getElementById('modalImg');
+let current = 0;
+function openModal(i){
+  current = i;
+  const w = works[i];
+  modalImg.src = w.img;
+  modalImg.alt = w.title;
+  document.getElementById('modalTitle').textContent = w.title;
+  document.getElementById('modalCat').textContent = 'Attachment ' + w.id;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+function show(i){ if(i<0) i=works.length-1; if(i>=works.length) i=0; openModal(i); }
+modalBackdrop.addEventListener('click', closeModal);
+modalClose.addEventListener('click', closeModal);
+document.getElementById('prevBtn').addEventListener('click', ()=> show(current-1));
+document.getElementById('nextBtn').addEventListener('click', ()=> show(current+1));
+document.addEventListener('keydown', e=>{
+  if(!modal.classList.contains('open')) return;
+  if(e.key==='Escape') closeModal();
+  if(e.key==='ArrowLeft') show(current-1);
+  if(e.key==='ArrowRight') show(current+1);
+});
+
+document.getElementById('heroCount').textContent = works.length + ' selected works';
+</script>
+</body>
+</html>

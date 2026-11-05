@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Forma logo">
+  <title>Forma</title>
+  <polygon points="100,36 162,68 100,100 38,68" fill="#3a5a78"/>
+  <polygon points="38,68 100,100 100,172 38,140" fill="#2e4a66"/>
+  <polygon points="162,68 100,100 100,172 162,140" fill="#4a6a8a"/>
+</svg>

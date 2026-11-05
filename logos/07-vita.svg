@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Vita logo">
+  <title>Vita</title>
+  <path d="M100 40 Q162 82 150 142 Q100 174 50 142 Q38 82 100 40 Z" fill="#6b8e6b"/>
+  <polyline points="42,112 72,112 86,90 100,134 114,100 128,112 158,112" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

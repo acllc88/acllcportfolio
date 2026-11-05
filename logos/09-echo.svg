@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Echo logo">
+  <title>Echo</title>
+  <circle cx="52" cy="100" r="9" fill="#6d28d9"/>
+  <g fill="none" stroke="#6d28d9" stroke-width="7" stroke-linecap="round">
+    <path d="M 74 78 A 30 30 0 0 1 74 122"/>
+    <path d="M 96 58 A 52 52 0 0 1 96 142"/>
+    <path d="M 118 38 A 74 74 0 0 1 118 162"/>
+  </g>
+</svg>
